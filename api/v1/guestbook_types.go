@@ -30,32 +30,19 @@ type GuestbookSpec struct {
 	// The following markers will use OpenAPI v3 schema to validate the value
 	// More info: https://book.kubebuilder.io/reference/markers/crd-validation.html
 
-	// foo is an example field of Guestbook. Edit guestbook_types.go to remove/update
-	// +optional
-	Foo *string `json:"foo,omitempty"`
+	//	 实例数量
+	Size int32 `json:"size"`
+
+	//	 GustBookSpec 配置的ConfigMap名称
+	ConfigMapName string `json:"configMapName"`
+	Type          string `json:"type,omitempty"`
 }
 
 // GuestbookStatus defines the observed state of Guestbook.
 type GuestbookStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	Active string `json:"active"`
 
-	// For Kubernetes API conventions, see:
-	// https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#typical-status-properties
-
-	// conditions represent the current state of the Guestbook resource.
-	// Each condition has a unique type and reflects the status of a specific aspect of the resource.
-	//
-	// Standard condition types include:
-	// - "Available": the resource is fully functional
-	// - "Progressing": the resource is being created or updated
-	// - "Degraded": the resource failed to reach or maintain its desired state
-	//
-	// The status of each condition is one of True, False, or Unknown.
-	// +listType=map
-	// +listMapKey=type
-	// +optional
-	Conditions []metav1.Condition `json:"conditions,omitempty"`
+	Standby []string `json:"standby"`
 }
 
 // +kubebuilder:object:root=true
@@ -63,19 +50,11 @@ type GuestbookStatus struct {
 
 // Guestbook is the Schema for the guestbooks API
 type Guestbook struct {
-	metav1.TypeMeta `json:",inline"`
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// metadata is a standard object metadata
-	// +optional
-	metav1.ObjectMeta `json:"metadata,omitzero"`
-
-	// spec defines the desired state of Guestbook
-	// +required
-	Spec GuestbookSpec `json:"spec"`
-
-	// status defines the observed state of Guestbook
-	// +optional
-	Status GuestbookStatus `json:"status,omitzero"`
+	Spec   GuestbookSpec   `json:"spec,omitempty"`
+	Status GuestbookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
