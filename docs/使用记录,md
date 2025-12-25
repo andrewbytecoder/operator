@@ -1,0 +1,20 @@
+
+
+
+
+
+```bash
+# 初始化
+kubebuilder init --domain github.com --repo github.com/andrewbytecoder/memcached
+# 创建api
+kubebuilder create api --group cache --version v1alpha1 --kind Memcached
+```
+
+
+- 修改 types代码之后需要运行如下命令
+
+```bash
+ 运行 make generate 会更新zz_generated.deepcopy.go 生成深度copy的内容
+运行 make manifests,会在 config/crd/bases 下生成 CRD 清单，并在 config/crd/samples 下生成一个示例文件。
+这两个命令都使用 controller-gen 工具，但是用于代码和清单生成的标志会有所不同。
+```

@@ -20,19 +20,19 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+// 运行 make generate 会更新zz_generated.deepcopy.go 生成深度copy的内容
+// 运行 make manifests,会在 config/crd/bases 下生成 CRD 清单，并在 config/crd/samples 下生成一个示例文件。
+// 这两个命令都使用 controller-gen 工具，但是用于代码和清单生成的标志会有所不同。
 
 // MemcachedSpec defines the desired state of Memcached
 type MemcachedSpec struct {
+	// 插入额外的规格字段 - 集群的期望状态
+	// 注意：修改此文档后需要运行 make 重新生成代码
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 	// The following markers will use OpenAPI v3 schema to validate the value
 	// More info: https://book.kubebuilder.io/reference/markers/crd-validation.html
-
-	// foo is an example field of Memcached. Edit memcached_types.go to remove/update
-	// +optional
-	Foo *string `json:"foo,omitempty"`
+	Size int32 `json:"size"`
 }
 
 // MemcachedStatus defines the observed state of Memcached.
